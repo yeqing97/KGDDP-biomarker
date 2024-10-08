@@ -20,7 +20,8 @@ pip install -r requirements.txt
 python hyper_model.py
 
 ### Data
-The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model. Below is a description of each dataset used in the project:
+<details>
+<summary>The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model. Click to expand for detailed description of each dataset used in the project</summary>
 
 1. **Knowledge Graph Data** (`kg`):
    - **File**: `kg_del_selfloop.csv`
@@ -53,9 +54,11 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 8. **Sample Information** (`dls`):
    - **File**: `sample_info.csv`
    - **Description**: This dataset includes sample information, including diagnosis details. It is used to filter out samples without diagnosis data and plays a critical role in training and validating the model.
+</details>
 
 ### Model Architecture
-The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Below are the key components of the model:
+<details>
+<summary>The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Click to expand for the key components of the model:</summary>
 
 1. **Input Features**:
    - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
@@ -85,4 +88,4 @@ The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep
    - The second graph convolution layer (`conv2`) refines the features based on the updated node representations.
    - Scores for interactions are calculated using the `mlp_decoder` by concatenating head and tail features for both positive and negative predictions.
    - The model outputs differences in scores for head-tail pairs, providing a measure of how likely they are to be linked.
-
+</details>
