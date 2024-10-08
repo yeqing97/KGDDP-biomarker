@@ -1,2 +1,88 @@
 # KGDDP-biomarker
-KG-enhanced disease diagnosis predictor
+## KG-enhanced Disease Diagnosis Predictor
+
+KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledge graphs (KG) to enhance disease diagnosis prediction. By integrating biomarker information with multi-modal data, this tool aims to provide more accurate and insightful disease diagnosis.
+
+### Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Data](#data)
+- [Model Architecture](#model-architecture)
+
+### Features
+- **KG-enhanced disease diagnosis predictor (KGDDP), a computational framework that integrates deep learning with a knowledge graph to facilitate disease diagnosis and biomarker identification.
+
+### Installation
+pip install -r requirements.txt
+
+### Usage
+python hyper_model.py
+
+### Data
+The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model. Below is a description of each dataset used in the project:
+
+1. **Knowledge Graph Data** (`kg`):
+   - **File**: `kg_del_selfloop.csv`
+   - **Description**: This dataset contains the knowledge graph data that represents relationships between biological entities, including drugs, proteins, and diseases. It is crucial for understanding the interconnections and enhancing the predictive capabilities of the model.
+
+2. **Negative Pathway-Protein Relationships** (`pro_path_neg_sp`):
+   - **File**: `human_neg_pathpro.csv`
+   - **Description**: This dataset provides information about negative relationships between pathways and proteins. It helps to identify potential non-relevant or inhibitory connections that may impact disease diagnosis.
+
+3. **Negative Disease-Protein Interactions** (`dpi_neg`):
+   - **File**: `neg_dpi_df_t10.csv`
+   - **Description**: This dataset includes negative interactions between diseases and proteins, which assists in refining the model by removing misleading associations that do not contribute positively to predictions.
+
+4. **Feature Profiles** (`fp_df`):
+   - **File**: `bdki_db_gdsc_fp.csv`
+   - **Description**: This dataset contains feature profiles of various samples, which are used to train the model. It includes a variety of biomarker data that is essential for accurate disease prediction.
+
+5. **Expression Triples** (`exp_triples`):
+   - **File**: `exp_triples.csv`
+   - **Description**: This dataset consists of expression triples representing relationships between genes and their expression levels. It is crucial for capturing the expression profiles of samples and understanding their role in disease pathology.
+
+6. **Expression Graph Triples** (`exp_triples_graph`):
+   - **File**: `exp_graph_triples.csv`
+   - **Description**: This dataset contains graph triples that depict relationships within the expression data. It is used to construct a graph representation of the data, which is essential for graph-based analysis techniques.
+
+7. **Expression Input Data** (`exp_input`):
+   - **File**: `se_exp_input.csv`
+   - **Description**: This dataset serves as the input for the expression data model, containing necessary information to perform predictions based on gene expression levels.
+
+8. **Sample Information** (`dls`):
+   - **File**: `sample_info.csv`
+   - **Description**: This dataset includes sample information, including diagnosis details. It is used to filter out samples without diagnosis data and plays a critical role in training and validating the model.
+
+### Model Architecture
+The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Below are the key components of the model:
+
+1. **Input Features**:
+   - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
+   - **`hid_feats`**: Hidden feature size, representing the dimensionality of the hidden layers in the model.
+   - **`pid_fea_sc`**, **`drug_fea`**: Preprocessed feature embeddings for proteins and drugs, respectively.
+   - **`pro_entity_df`**, **`pathway_entity_df`**, **`go_entity_df`**: DataFrames containing entities related to proteins, pathways, and Gene Ontology (GO) terms.
+
+2. **Graph Convolution Layers**:
+   - **`HeteroGraphConv`**: This layer performs message passing for heterogeneous graphs. It utilizes multiple types of convolutional layers:
+     - **`SAGEConv`**: Used for the relationships among proteins, pathways, and diseases, aggregating features from neighbor nodes to produce new representations.
+     - **`GraphConv`**: Specifically applied for the pathway-protein interactions, allowing for normalization and weighted updates of features.
+
+3. **Embedding Layers**:
+   - **`nn.Embedding`**: Used to create learnable embeddings for the protein, pathway, and GO entities. This allows the model to learn representations for these entities that capture their relationships within the knowledge graph.
+
+4. **Linear Layers**:
+   - **`W_in_drug`** and **`W_in_pid`**: Linear transformation layers that project the drug and protein input features into the input feature space for further processing.
+   - **`mlp_decoder`**: A multi-layer perceptron that takes concatenated features of head and tail nodes and outputs a score representing the likelihood of interaction.
+
+5. **Classifier Layers**:
+   - **`classifier_d`**: A sequential neural network that classifies the relationships into three categories based on the input features. It consists of a linear layer followed by a ReLU activation and another linear layer.
+
+6. **Forward Pass**:
+   The `forward` method of the `KGDDP` model implements the computation for the prediction process:
+   - Node features are initialized from embeddings and input features.
+   - The first graph convolution layer (`conv1`) processes the input graph `g` with the initial node features.
+   - The second graph convolution layer (`conv2`) refines the features based on the updated node representations.
+   - Scores for interactions are calculated using the `mlp_decoder` by concatenating head and tail features for both positive and negative predictions.
+   - The model outputs differences in scores for head-tail pairs, providing a measure of how likely they are to be linked.
+
