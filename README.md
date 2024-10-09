@@ -11,9 +11,14 @@ KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledg
 - [Model Architecture](#model-architecture)
 
 ### Features
-- **KG-enhanced disease diagnosis predictor (KGDDP), a computational framework that integrates deep learning with a knowledge graph to facilitate disease diagnosis and biomarker identification.
+- We introduce the computational framework of KGDDP that integrates deep learning with a knowledge graph to facilitate biomarker identification.
+- KGDDP provides validated and novel biomarkers for distinguish IBD patients.
+- A two-step model based biomarker combinations classify IBD patients with its subtypes.
+- KGDDP enhanced interpretability enables the potential mechanisms of biomarkers in IBD.
 
 ### Installation
+To reproduce the results of this project, please follow the steps below:
+Python == 3.6
 pip install -r requirements.txt
 
 ### Usage
