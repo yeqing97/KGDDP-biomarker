@@ -1,7 +1,7 @@
 # KGDDP-biomarker
 ## KG-enhanced Disease Diagnosis Predictor
-
 KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledge graphs (KG) to enhance disease diagnosis prediction. By integrating biomarker information with multi-modal data, this tool aims to provide more accurate and insightful disease diagnosis.
+![Model Architecture](representation learnin on KG.png)
 
 ### Table of Contents
 - [Features](#features)
