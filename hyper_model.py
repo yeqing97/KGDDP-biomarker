@@ -1,30 +1,29 @@
 import pandas as pd
 from tqdm import tqdm
 from data_utils import preprocess_data,construct_graph
-from model import RGCN
+from model import KGDDP
 from train_model import train_one_epoch, evaluate_model
 import torch
 from sklearn.model_selection import train_test_split
 import optuna
 
 # Set the path to the data directory
-path = '../data/'
+path = './data/'
 
 # Load and preprocess data...
-kg = pd.read_csv('/Users/IBD/data/kg_del_selfloop.csv')
-pro_path_neg_sp = pd.read_csv('/Users/IBD/data/human_neg_pathpro.csv')
-dpi_neg = pd.read_csv('/Users/IBD/data/neg_dpi_df_t10.csv')
-fp_df = pd.read_csv('/Users/IBD/data/bdki_db_gdsc_fp.csv')
-exp_triples = pd.read_csv(path + 'GSE66407_se_exp_triples.csv')
-exp_triples_graph = pd.read_csv(path + 'exp_graph_triples_240417.csv')
-exp_input = pd.read_csv(path + 'GSE66407_se_exp_input.csv')
-dls = pd.read_csv(path + 'GSE66407_sample_info.csv').dropna(subset=['Diagnosis'])
+kg = pd.read_csv(path+'kg_del_selfloop.csv')
+pro_path_neg_sp = pd.read_csv(path + 'human_neg_pathpro.csv')
+dpi_neg = pd.read_csv(path + 'neg_dpi_df_t10.csv')
+fp_df = pd.read_csv(path + 'bdki_db_gdsc_fp.csv')
 
-# Merge data
+exp_triples = pd.read_csv(path + 'gse169568/gse169568_exp_triples_1128.csv')
+exp_triples_graph = pd.read_csv(path + 'gse169568/gse169568_graph_pair.csv')
+exp_input = pd.read_csv(path + 'gse169568/gse169568_exp_1444.csv')
+exp_input.columns = ['pid']+list(exp_input.columns[1:])
+
+dls = pd.read_csv(path + 'gse169568/group_info.csv')
 dls.columns = ['pid']+list(dls.columns[1:])
-exp_input = pd.merge(dls['pid'],exp_input)
-exp_triples = pd.merge(dls['pid'],exp_triples)
-exp_triples_graph = pd.merge(dls['pid'],exp_triples_graph)
+dls = pd.merge(dls, exp_input['pid'])
 
 # Preprocess data
 processed_data = preprocess_data(kg, exp_triples, exp_triples_graph, exp_input,
@@ -55,7 +54,7 @@ def train_loop(params):
     patience = params['patience']
 
     # Instantiate the model
-    model = RGCN(in_feats, hid_feats, aggregator_type,feat_drop,
+    model = KGDDP(in_feats, hid_feats, aggregator_type,feat_drop,
                 device,pid_fea_sc, drug_fea, pro_entity_df, pathway_entity_df, go_entity_df).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=10e-6)
 
@@ -67,13 +66,14 @@ def train_loop(params):
     val_spearman = 0
 
     for epoch in tqdm(range(100)):
-        model,node_feats,loss_sum,d_score,exp_contrast_test_head = train_one_epoch(model, opt, graph,
+        model,node_feats,loss_sum,d_score,exp_contrast_test_head,exp_contrast_test_tail = train_one_epoch(model, opt, graph,
                     exp_triples_train, exp_triples_test,
                     pro_path_pos,pro_path_neg_sp,dpi_pos,dpi_neg,
                     train_pid,train_pid_label,
                     params,epoch,device,loss_thre,
                     val_spearman)
-        loss_sum_mean, val_corr, val_spearman, train_d_acc, val_d_roc_auc, val_d_acc = evaluate_model(model,node_feats,exp_contrast_test_head,epoch,
+        loss_sum_mean, val_corr, val_spearman, train_d_acc, val_d_roc_auc, val_d_acc = evaluate_model(model,node_feats,
+                    exp_contrast_test_head,exp_contrast_test_tail,epoch,
                     loss_sum,d_score,train_pid_label,val_pid,val_pid_label)
         
         ### Early stopping

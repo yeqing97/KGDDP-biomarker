@@ -12,7 +12,8 @@ def preprocess_data(kg, exp_triples, exp_triples_graph, exp_input,pro_path_neg_s
     dls['tail_id'] = pd.merge(dls,pid_entity_df,how='right',left_on='pid',right_on='entity')['code'].values
     dls = dls.dropna(subset=['tail_id'])
     dls.index= range(len(dls))
-    class_to_label = {cls: label for label, cls in enumerate(dls['Diagnosis'].unique())}
+    #class_to_label = {cls: label for label, cls in enumerate(dls['Diagnosis'].unique())}
+    class_to_label = {'Symptomatic control': 0, 'Ulcerative colitis': 1, "Crohn's disease": 2, 'Healthy control': 0}
     print(class_to_label)
     dls['d_label'] = dls['Diagnosis'].map(class_to_label)
     ### drug_entity_process

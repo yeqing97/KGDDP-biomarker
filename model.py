@@ -56,7 +56,7 @@ class KGDDP(nn.Module):
 
         node_feats['pid'] = pid_in_feats
         node_feats_ = self.conv2(g, node_feats,node_feats)
-        print(node_feats_)
+        #print(node_feats_)
 
         node_feats['pid'] = node_feats_['pid'] 
         h_head_feats = node_feats['protein'][h_head_idx]
