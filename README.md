@@ -29,6 +29,8 @@ python hyper_model.py
 
 ### Data
 The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model.
+- Due to file size limitations, the dataset is hosted externally. 
+- You can download it from the following link: https://doi.org/10.5281/zenodo.13920084 
 <details>
 <summary> Click to expand for detailed description of each dataset used in the project</summary>
 
