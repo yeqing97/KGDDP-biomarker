@@ -19,15 +19,18 @@ KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledg
 
 ### Installation
 To reproduce the results of this project, please follow the steps below:
-Python == 3.6
-pip install -r requirements.txt
+- Python == 3.6
+- conda create -n KGDDP python=3.6
+- pip install -r requirements.txt
+- **Noted:**  To implement heterogeneous message passing, replace the hetero.py file located at ./anaconda3/envs/env_name/lib/python3.6/site-packages/dgl/nn/pytorch/hetero.py with the version provided.
 
 ### Usage
 python hyper_model.py
 
 ### Data
+The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model.
 <details>
-<summary>The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model. Click to expand for detailed description of each dataset used in the project</summary>
+<summary> Click to expand for detailed description of each dataset used in the project</summary>
 
 1. **Knowledge Graph Data** (`kg`):
    - **File**: `kg_del_selfloop.csv`
@@ -63,8 +66,9 @@ python hyper_model.py
 </details>
 
 ### Model Architecture
-<details>
-<summary>The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Click to expand for the key components of the model:</summary>
+The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction.
+<details> The model integrates various types of biological interactions using graph neural networks. 
+<summary> Click to expand for the key components of the model:</summary>
 
 1. **Input Features**:
    - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
