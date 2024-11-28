@@ -1,4 +1,4 @@
-# KGDDP-biomarker
+ # KGDDP-biomarker
 ## KG-enhanced Disease Diagnosis Predictor
 KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledge graphs (KG) to enhance disease diagnosis prediction. By integrating biomarker information with multi-modal data, this tool aims to provide more accurate and insightful disease diagnosis.
 
@@ -64,13 +64,12 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 
 8. **Sample Information** (`dls`):
    - **File**: `sample_info.csv`
-   - **Description**: This dataset includes sample information, including diagnosis details. It is used to filter out samples without diagnosis data and plays a critical role in training and validating the model.
+   - **Description**: This dataset includes sample information, including diagnosis details. 
 </details>
 
 ### Model Architecture
-The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction.
-<details> The model integrates various types of biological interactions using graph neural networks. 
-<summary> Click to expand for the key components of the model:</summary>
+<details>
+<summary>The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Click to expand for the key components of the model:</summary>
 
 1. **Input Features**:
    - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
