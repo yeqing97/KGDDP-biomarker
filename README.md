@@ -40,19 +40,19 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 
 2. **Negative Pathway-Protein Relationships** (`pro_path_neg_sp`):
    - **File**: `human_neg_pathpro.csv`
-   - **Description**: This dataset provides information about negative relationships between pathways and proteins. It helps to identify potential non-relevant or inhibitory connections that may impact disease diagnosis.
+   - **Description**: This dataset provides information about negative relationships between pathways and proteins. 
 
-3. **Negative Disease-Protein Interactions** (`dpi_neg`):
+3. **Negative Drug-Protein Interactions** (`dpi_neg`):
    - **File**: `neg_dpi_df_t10.csv`
-   - **Description**: This dataset includes negative interactions between diseases and proteins, which assists in refining the model by removing misleading associations that do not contribute positively to predictions.
+   - **Description**: This dataset includes negative interactions between drug and proteins.
 
 4. **Feature Profiles** (`fp_df`):
    - **File**: `bdki_db_gdsc_fp.csv`
-   - **Description**: This dataset contains feature profiles of various samples, which are used to train the model. It includes a variety of biomarker data that is essential for accurate disease prediction.
+   - **Description**: This dataset contains molecular fingerprints of drugs, which are used to train the model.
 
 5. **Expression Triples** (`exp_triples`):
    - **File**: `exp_triples.csv`
-   - **Description**: This dataset consists of expression triples representing relationships between genes and their expression levels. It is crucial for capturing the expression profiles of samples and understanding their role in disease pathology.
+   - **Description**: This dataset consists of expression triples representing relationships between genes and their expression levels.
 
 6. **Expression Graph Triples** (`exp_triples_graph`):
    - **File**: `exp_graph_triples.csv`
@@ -64,7 +64,7 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 
 8. **Sample Information** (`dls`):
    - **File**: `sample_info.csv`
-   - **Description**: This dataset includes sample information, including diagnosis details. 
+   - **Description**: This dataset includes sample information. 
 </details>
 
 ### Model Architecture
