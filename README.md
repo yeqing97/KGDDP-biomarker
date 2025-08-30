@@ -1,4 +1,3 @@
- # KGDDP-biomarker
 ## KG-enhanced Disease Diagnosis Predictor
 
 ### Table of Contents
