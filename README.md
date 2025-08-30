@@ -1,8 +1,5 @@
  # KGDDP-biomarker
 ## KG-enhanced Disease Diagnosis Predictor
-KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledge graphs (KG) to enhance disease diagnosis prediction. By integrating biomarker information with multi-modal data, this tool aims to provide more accurate and insightful disease diagnosis.
-
-![Model Architecture](./model.png)
 
 ### Table of Contents
 - [Features](#features)
@@ -12,10 +9,8 @@ KGDDP-biomarker is a sophisticated machine learning model that utilizes knowledg
 - [Model Architecture](#model-architecture)
 
 ### Features
-- We introduce the computational framework of KGDDP that integrates deep learning with a knowledge graph to facilitate biomarker identification.
-- KGDDP provides validated and novel biomarkers for distinguish IBD patients.
+- We introduce the computational framework that integrates deep learning with a knowledge graph to facilitate biomarker identification.
 - A two-step model based biomarker combinations classify IBD patients with its subtypes.
-- KGDDP enhanced interpretability enables the potential mechanisms of biomarkers in IBD.
 
 ### Installation
 To reproduce the results of this project, please follow the steps below:
@@ -28,7 +23,7 @@ To reproduce the results of this project, please follow the steps below:
 python hyper_model.py
 
 ### Data
-The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model.
+This project utilizes mutli-modal data to build and evaluate the disease diagnosis prediction model.
 - Due to file size limitations, the dataset is hosted externally. 
 - You can download it from the following link: https://doi.org/10.5281/zenodo.13920084 
 <details>
@@ -69,7 +64,6 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 
 ### Model Architecture
 <details>
-<summary>The KGDDP (Knowledge Graph Enhanced Disease Diagnosis Predictor) model is a deep learning architecture designed to leverage heterogeneous graph data for disease diagnosis prediction. The model integrates various types of biological interactions using graph neural networks. Click to expand for the key components of the model:</summary>
 
 1. **Input Features**:
    - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
@@ -92,11 +86,4 @@ The KGDDP-biomarker project utilizes mutli-modal data to build and evaluate the 
 5. **Classifier Layers**:
    - **`classifier_d`**: A sequential neural network that classifies the relationships into three categories based on the input features. It consists of a linear layer followed by a ReLU activation and another linear layer.
 
-6. **Forward Pass**:
-   The `forward` method of the `KGDDP` model implements the computation for the prediction process:
-   - Node features are initialized from embeddings and input features.
-   - The first graph convolution layer (`conv1`) processes the input graph `g` with the initial node features.
-   - The second graph convolution layer (`conv2`) refines the features based on the updated node representations.
-   - Scores for interactions are calculated using the `mlp_decoder` by concatenating head and tail features for both positive and negative predictions.
-   - The model outputs differences in scores for head-tail pairs, providing a measure of how likely they are to be linked.
 </details>
