@@ -62,8 +62,6 @@ This project utilizes mutli-modal data to build and evaluate the disease diagnos
 </details>
 
 ### Model Architecture
-<details>
-
 1. **Input Features**:
    - **`in_feats`**: Input feature size, representing the dimensionality of the feature vectors for the nodes in the graph.
    - **`hid_feats`**: Hidden feature size, representing the dimensionality of the hidden layers in the model.
@@ -85,4 +83,4 @@ This project utilizes mutli-modal data to build and evaluate the disease diagnos
 5. **Classifier Layers**:
    - **`classifier_d`**: A sequential neural network that classifies the relationships into three categories based on the input features. It consists of a linear layer followed by a ReLU activation and another linear layer.
 
-</details>
+
